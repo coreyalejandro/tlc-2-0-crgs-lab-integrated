@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sitemap &amp; Build Progress · TLC 2.0 × CRGS Lab</title>
+<meta name="description" content="Full site inventory and build progress for The Living Constitution 2.0 × CRGS Lab integrated site. All 47 pages tracked by build status.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  /* ── Progress banner ── */
+  .progress-banner {
+    background: var(--ink);
+    color: var(--dim-terminal-fg);
+    padding: 32px 5%;
+    border-bottom: 2px solid var(--ink);
+  }
+  .progress-banner-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 32px;
+    align-items: center;
+  }
+  .progress-eyebrow {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--dim-terminal-accent);
+    margin-bottom: 10px;
+  }
+  .progress-headline {
+    font-family: var(--serif);
+    font-size: clamp(24px, 3.5vw, 38px);
+    font-weight: 500;
+    margin: 0 0 14px 0;
+    color: var(--dim-terminal-fg);
+    line-height: 1.15;
+  }
+  .progress-headline em { color: var(--dim-terminal-accent); font-style: italic; }
+  .progress-meta {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: rgba(212,203,181,0.6);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── Big number scoreboard ── */
+  .scoreboard {
+    display: flex;
+    gap: 24px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .score-cell { }
+  .score-num {
+    font-family: var(--mono);
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .score-num.built   { color: #6ec975; }
+  .score-num.partial { color: #e4b34e; }
+  .score-num.planned { color: rgba(212,203,181,0.45); }
+  .score-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(212,203,181,0.5);
+  }
+
+  /* ── Global progress bar ── */
+  .global-bar-wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 20px 5% 0;
+  }
+  .global-bar-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .global-bar {
+    height: 6px;
+    background: var(--rule-soft);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 28px;
+  }
+  .global-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #6ec975 var(--pct), #e4b34e var(--pct), #e4b34e var(--pct2), var(--rule-soft) var(--pct2));
+    border-radius: 3px;
+  }
+
+  /* ── Section headers ── */
+  .sm-section {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 5%;
+  }
+  .sm-section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    padding: 36px 0 14px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 16px;
+  }
+  .sm-section-head h2 {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 500;
+    margin: 0;
+    letter-spacing: -0.005em;
+  }
+  .sm-section-count {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  /* ── Page grid ── */
+  .page-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 12px;
+    margin-bottom: 48px;
+  }
+  .page-card {
+    background: var(--card);
+    border: 1px solid var(--rule-soft);
+    border-left: 3px solid var(--rule);
+    padding: 16px 18px;
+    display: block;
+    text-decoration: none;
+    color: var(--ink);
+    position: relative;
+    transition: border-left-color 0.15s ease;
+  }
+  .page-card:hover { border-left-color: var(--accent); color: var(--ink); }
+  .page-card.status-built  { border-left-color: var(--green-verified); }
+  .page-card.status-partial { border-left-color: var(--amber-progress); }
+  .page-card.status-planned { border-left-color: var(--rule); opacity: 0.65; }
+  .page-card.status-planned:hover { opacity: 1; border-left-color: var(--ink-faint); }
+
+  .card-path {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-faint);
+    margin-bottom: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .card-title {
+    font-family: var(--serif);
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0 0 4px 0;
+    line-height: 1.25;
+  }
+  .card-desc {
+    font-family: var(--sans);
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin: 0 0 10px 0;
+    line-height: 1.45;
+  }
+  .card-badge {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 2px;
+    border: 1px solid;
+  }
+  .badge-built   { color: var(--green-verified);  border-color: var(--green-verified); }
+  .badge-partial { color: var(--amber-progress);  border-color: var(--amber-progress); }
+  .badge-planned { color: var(--ink-faint);        border-color: var(--rule); }
+</style>
+</head>
+<body class="register-operational">
+
+<a href="#main-content" style="position:absolute;left:-9999px;top:0;font-size:1px;">Skip to main content</a>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="index.html" class="topbar-brand">The Living <span class="em">Constitution</span> 2.0</a>
+    <nav class="topbar-nav" aria-label="Main navigation">
+      <a href="tool.html" class="topbar-link">Tool</a>
+      <a href="tiers.html" class="topbar-link">Tiers</a>
+      <a href="pipeline.html" class="topbar-link">Pipeline</a>
+      <a href="template.html" class="topbar-link">Template</a>
+      <a href="registry.html" class="topbar-link">Registry</a>
+      <a href="detector.html" class="topbar-link">Detector</a>
+      <a href="paper.html" class="topbar-link">Paper</a>
+      <a href="programs/crgs.html" class="topbar-link">CRGS Lab</a>
+      <a href="identity.html" class="topbar-link">Identity</a>
+      <a href="sitemap.html" class="topbar-link is-active">Map</a>
+      <span class="topbar-kernel-hint" aria-hidden="true">Ctrl+` Kernel</span>
+    </nav>
+  </div>
+</header>
+
+<main id="main-content">
+
+<!-- ── PROGRESS BANNER ── -->
+<div class="progress-banner">
+  <div class="progress-banner-inner">
+    <div>
+      <div class="progress-eyebrow">Build Progress · Phase 1 of 3</div>
+      <h1 class="progress-headline">
+        <em>8</em> pages live.<br>39 to build.
+      </h1>
+      <div class="progress-meta">TLC 2.0 × CRGS Lab · Pure HTML · No build step · Last updated 2026-06-22</div>
+    </div>
+    <div class="scoreboard">
+      <div class="score-cell">
+        <div class="score-num built" id="count-built">8</div>
+        <div class="score-label">Built</div>
+      </div>
+      <div class="score-cell">
+        <div class="score-num partial" id="count-partial">0</div>
+        <div class="score-label">Partial</div>
+      </div>
+      <div class="score-cell">
+        <div class="score-num planned" id="count-planned">39</div>
+        <div class="score-label">Planned</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── GLOBAL PROGRESS BAR ── -->
+<div class="global-bar-wrap">
+  <div class="global-bar-label">
+    <span>Overall completion</span>
+    <span id="pct-label">17% built (8 / 47 pages)</span>
+  </div>
+  <div class="global-bar">
+    <div class="global-bar-fill" style="--pct:17%;--pct2:17%;"></div>
+  </div>
+</div>
+
+<!-- ====================================================
+     SECTION 1 — Core Tool Pages
+     ==================================================== -->
+<div class="sm-section">
+  <div class="sm-section-head">
+    <h2>Core Tool Pages</h2>
+    <span class="sm-section-count">8 of 8 built</span>
+  </div>
+  <div class="page-grid">
+    <a href="index.html" class="page-card status-built">
+      <div class="card-path">index.html</div>
+      <h3 class="card-title">Homepage</h3>
+      <p class="card-desc">Mission hero, six-tier grid, tool overview, FOLIO 001 case deck, routes.</p>
+      <span class="card-badge badge-built">Built</span>
+    </a>
+    <a href="tool.html" class="page-card status-built">
+      <div class="card-path">tool.html</div>
+      <h3 class="card-title">The Tool — TLC 2.0 Architecture</h3>
+      <p class="card-desc">6-layer architecture deep-dive. Runtime, CEM, CALS, PROACTIVE, governance, publication.</p>
+      <span class="card-badge badge-built">Built</span>
+    </a>
+    <a href="tiers.html" class="page-card status-built">
+      <div class="card-path">tiers.html</div>
+      <h3 class="card-title">Six Tiers · $100–$1B</h3>
+      <p class="card-desc">Full technical specs per tier. Governance layer. Confidence mechanism. Output deliverable.</p>
+      <span class="card-badge badge-built">Built</span>
+    </a>
+    <a href="pipeline.html" class="page-card status-built">
+      <div class="card-path">pipeline.html</div>
+      <h3 class="card-title">Research → Paper → Product Pipeline</h3>
+      <p class="card-desc">Six-step pipeline with module mapping and truth_status at every step.</p>
+      <span class="card-badge badge-built">Built</span>
+    </a>
+    <a href="template.html" class="page-card status-built">
+      <div class="card-path">template.html</div>
+      <h3 class="card-title">CALS v6.1 Research Template</h3>
+      <p class="card-desc">1,062-line publication-grade research protocol. NSF-format. Neurodivergent-first. Free download.</p>
+      <span class="card-badge badge-built">Built</span>
+    </a>
+    <a href="registry.html" class="page-card status-built">
+      <div class="card-path">registry.html</div>
+      <h3 class="card-title">Live Module Registry</h3>
+      <p class="card-desc">Real-time truth_status for every module. Working, partial, planned — honest.</p>
+      <span class="card-badge badge-built">Built</span>
+    </a>
+    <a href="identity.html" class="page-card status-built">
+      <div class="card-path">identity.html</div>
+      <h3 class="card-title">Canonical Identity</h3>
+      <p class="card-desc">Non-negotiable identity statement. Versioned, dated, amendment-logged.</p>
+      <span class="card-badge badge-built">Built</span>
+    </a>
+    <a href="programs/crgs.html" class="page-card status-built">
+      <div class="card-path">programs/crgs.html</div>
+      <h3 class="card-title">CRGS Lab</h3>
+      <p class="card-desc">Constitutional Runtime Governance Systems Research Lab. Programs, publications, speaking.</p>
+      <span class="card-badge badge-built">Built</span>
+    </a>
+  </div>
+</div>
+
+<!-- ====================================================
+     SECTION 2 — Research
+     ==================================================== -->
+<div class="sm-section">
+  <div class="sm-section-head">
+    <h2>Research</h2>
+    <span class="sm-section-count">0 of 7 built</span>
+  </div>
+  <div class="page-grid">
+    <a href="paper.html" class="page-card status-planned">
+      <div class="card-path">paper.html</div>
+      <h3 class="card-title">The CCD Preprint</h3>
+      <p class="card-desc">Operational definition, held-in results, threat model, four pre-registered falsifiers.</p>
+      <span class="card-badge badge-planned">Planned</span>
+    </a>
+    <a href="detector.html" class="page-card status-planned">
+      <div class="card-path">detector.html</div>
+      <h3 class="card-title">Deception Detector Sandbox</h3>
+      <p class="card-desc">Paste any transcript. Run PROACTIVE's four features client-side in the browser.</p>
+      <span class="card-badge badge-planned">Planned</span>
+    </a>
+    <a href="folio/001.html" class="page-card status-planned">
+      <div class="card-path">folio/001.html</div>
+      <h3 class="card-title">FOLIO 001 — The Founding Case</h3>
+      <p class="card-desc">4,025 transcript lines. The multi-session arc that made TLC 2.0 necessary.</p>
+      <span class="card-badge badge-planned">Planned</span>
+    </a>
+    <a href="research/corpus.html" class="page-card status-planned">
+      <div class="card-path">research/corpus.html</div>
+      <h3 class="card-title">Research Corpus</h3>
+      <p class="card-desc">Full transcript corpus, annotated. Session index. Evidence chain.</p>
+      <span class="card-badge badge-planned">Planned</span>
+    </a>
+    <a href="research/methodology.html" class="page-card status-planned">
+      <div class="card-path">research/methodology.html</div>
+      <h3 class="card-title">Methodology</h3>
+      <p class="card-desc">Neurodivergent-first research methodology. Consent-aware. Local-first.</p>
+      <span class="card-badge badge-planned">Planned</span>
+    </a>
+    <a href="research/pre-registration.html" class="page-card status-planned">
+      <div class="card-path">research/pre-registration.html</div>
+      <h3 class="card-title">Pre-registration</h3>
+      <p class="card-desc">Four pre-registered falsification criteria. Open Science Framework stub.</p>
+      <span class="card-badge badge-planned">Planned</span>
+    </a>
+    <a href="research/taxonomy.html" class="page-card status-planned">
+      <div class="card-path">research/taxonomy.html</div>
+      <h3 class="card-title">Behavioral Misrepresentation Taxonomy</h3>
+      <p class="card-desc">CCD taxonomy. Mode 1–5 behavioral misrepresentation. Formal definitions.</p>
+      <span class="card-badge badge-planned">Planned</span>
+    </a>
+  </div>
+</div>
+
+<!-- ====================================================
+     SECTION 3 — Security & Governance
+     ==================================================== -->
+<div class="sm-section">
+  <div class="sm-section-head">
+    <h2>Security &amp; Governance</h2>
+    <span class="sm-section-count">0 of 5 built</span>
+  </div>
+  <div class="page-grid">
+    <a href="governance/coi.html" class="page-card status-planned">
+      <div class="card-path">governance/coi.html</div>
+      <h3 class="card-title">Conflicts of Interest</h3>
+      <p class="card-desc">Full disclosure. No undisclosed affiliations. Governed by TLC 2.0 constitution.</p>
+      <span class="card-badge badge-planned">Planned</span>
+    </a>
+    <a href="security/threat-model.html" class="page-card status-planned">
+      <div class="card-path">security/threat-model.html</div>
+      <h3 class="card-title">Threat Model</h3>
+      <p class="card-desc">Adversarial threat model for constitutional AI runtime. Attack surface analysis.</p>
+      <span class="card-badge badge-planned">Planned</span>
+    </a>
+    <a href="security/reader-consent.html" class="page-card status-planned">
+      <div class="card-path">security/reader-consent.html</div>
+      <h3 class="card-title">Reader Consent (R-441)</h3>
+      <p class="card-desc">Consent protocol for vulnerable user research. Informed consent architecture.</p>
+      <span class="card-badge badge-planned">Planned</span>
+    </a>
+    <a href="objections.html" class="page-card status-planned">
+      <div class="card-path">objections.html</div>
+      <h3 class="card-title">Reviewer Objections</h3>
+      <p class="card-desc">Ten anticipated objections with concrete receipts. Including "this one."</p>
+      <span class="card-badge badge-planned">Planned</span>
+    </a>
+    <a href="funding-ask.html" class="page-card status-planned">
+      <div class="card-path">funding-ask.html</div>
+      <h3 class="card-title">The Funding Ask</h3>
+      <p class="card-desc">$89k / $190k / $480k. Entity, deliverables, the question your dollars answer.</p>
+      <span class="card-badge badge-planned">Planned</span>
+    </a>
+  </div>
+</div>
+
+<!-- ====================================================
+     SECTION 4 — Runtime
+     ==================================================== -->
+<div class="sm-section">
+  <div class="sm-section-head">
+    <h2>Runtime</h2>
+    <span class="sm-section-count">0 of 4 built</span>
+  </div>
+  <div class="page-grid">
+    <a href="runtime/reproduce.html" class="page-card status-planned">
+      <div class="card-path">runtime/reproduce.html</div>
+      <h3 class="card-title">Reproduce Path</h3>
+      <p class="card-desc">Step-by-step instructions to reproduce every claim in TLC 2.0 from a fresh clone.</p>
+      <span class="card-badge badge-planned">Planned</span>
+    </a>
+    <a href="runtime/benchmarks.html" class="page-card status-planned">
+      <div class="card-path">runtime/benchmarks.html</div>
+      <h3 class="card-title">Benchmarks Protocol</h3>
+      <p class="card-desc">Completion claim verification protocol. Runtime state vs. documentation state.</p>
+      <span class="card-badge badge-planned">Planned</span>
+    </a>
+    <a href="runtime/changelog.html" class="page-card status-planned">
+      <div class="card-path">runtime/changelog.html</div>
+      <h3 class="card-title">Constitutional Changelog</h3>
+      <p class="card-desc">Every ratified amendment to the TLC 2.0 Sociotechnical Constitution. Append-only log.</p>
+      <span class="card-badge badge-planned">Planned</span>
+    </a>
+    <a href="runtime/audit.html" class="page-card status-planned">
+      <div class="card-path">runtime/audit.html</div>
+      <h3 class="card-title">Audit Trail</h3>
+      <p class="card-desc">Immutable governance record. Git-hash-anchored. Scales to blockchain at Tier 6.</p>
+      <span class="card-badge badge-planned">Planned</span>
+    </a>
+  </div>
+</div>
+
+<!-- ====================================================
+     SECTION 5 — About & Programs
+     ==================================================== -->
+<div class="sm-section">
+  <div class="sm-section-head">
+    <h2>About &amp; Programs</h2>
+    <span class="sm-section-count">0 of 7 built</span>
+  </div>
+  <div class="page-grid">
+    <a href="about.html" class="page-card status-planned">
+      <div class="card-path">about.html</div>
+      <h3 class="card-title">About Corey Alejandro</h3>
+      <p class="card-desc">Hybrid AI Constitutional Runtime Governance Systems Research Scientist &amp; Engineer. Background, practice, identity.</p>
+      <span class="card-badge badge-planned">Planned</span>
+    </a>
+    <a href="subscribe.html" class="page-card status-planned">
+      <div class="card-path">subscribe.html</div>
+      <h3 class="card-title">Subscribe</h3>
+      <p class="card-desc">Follow research updates, constitutional amendments, and new folio publications.</p>
+      <span class="card-badge badge-planned">Planned</span>
+    </a>
+    <a href="programs/colm-2026.html" class="page-card status-planned">
+      <div class="card-path">programs/colm-2026.html</div>
+      <h3 class="card-title">COLM 2026 Program</h3>
+      <p class="card-desc">Research program targeting COLM 2026 submission. 62 pytest tests passing. Governance-kernel library verified.</p>
+      <span class="card-badge badge-planned">Planned</span>
+    </a>
+    <a href="programs/pilot.html" class="page-card status-planned">
+      <div class="card-path">programs/pilot.html</div>
+      <h3 class="card-title">Live Pilot Program</h3>
+      <p class="card-desc">10 pilot session slots. 0 completed. In planning. Constitutional research onboarding.</p>
+      <span class="card-badge badge-planned">Planned</span>
+    </a>
+    <a href="programs/speaking.html" class="page-card status-planned">
+      <div class="card-path">programs/speaking.html</div>
+      <h3 class="card-title">Speaking &amp; Appearances</h3>
+      <p class="card-desc">Speaking topics: constitutional AI governance, blockchain verification, neurodivergent-first research.</p>
+      <span class="card-badge badge-planned">Planned</span>
+    </a>
+    <a href="programs/consulting.html" class="page-card status-planned">
+      <div class="card-path">programs/consulting.html</div>
+      <h3 class="card-title">Consulting</h3>
+      <p class="card-desc">Constitutional AI governance consulting. Tier-matched engagements from startup to Fortune 500.</p>
+      <span class="card-badge badge-planned">Planned</span>
+    </a>
+    <a href="programs/open-source.html" class="page-card status-planned">
+      <div class="card-path">programs/open-source.html</div>
+      <h3 class="card-title">Open Source</h3>
+      <p class="card-desc">TLC 2.0 runtime, CALS template, PROACTIVE test suite — all open source. Contribution guide.</p>
+      <span class="card-badge badge-planned">Planned</span>
+    </a>
+  </div>
+</div>
+
+<!-- ====================================================
+     SECTION 6 — Phase 3 Enhancements (tracked)
+     ==================================================== -->
+<div class="sm-section">
+  <div class="sm-section-head">
+    <h2>Phase 3 Enhancements</h2>
+    <span class="sm-section-count">0 of 3 built</span>
+  </div>
+  <div class="page-grid">
+    <a href="governance/blockchain-diagram.html" class="page-card status-planned">
+      <div class="card-path">governance/blockchain-diagram.html</div>
+      <h3 class="card-title">Blockchain Governance Diagram</h3>
+      <p class="card-desc">SVG diagram: Git → file-hash → permissioned → public blockchain governance scaling.</p>
+      <span class="card-badge badge-planned">Planned</span>
+    </a>
+    <a href="research/theory-of-change.html" class="page-card status-planned">
+      <div class="card-path">research/theory-of-change.html</div>
+      <h3 class="card-title">Theory of Change</h3>
+      <p class="card-desc">From hobbyist agent deception detection to Fortune 500 constitutional AI governance at scale.</p>
+      <span class="card-badge badge-planned">Planned</span>
+    </a>
+    <a href="programs/ambassador.html" class="page-card status-planned">
+      <div class="card-path">programs/ambassador.html</div>
+      <h3 class="card-title">Ambassador Program</h3>
+      <p class="card-desc">Community-driven self-evolution of constitutional rules. Open-source governance contributors.</p>
+      <span class="card-badge badge-planned">Planned</span>
+    </a>
+  </div>
+</div>
+
+</main>
+
+<footer class="sitefoot">
+  <div class="sitefoot-inner">
+    <div class="sitefoot-col">
+      <h4>The Living Constitution 2.0</h4>
+      <p class="sitefoot-stmt">A constitutional AI-governed, blockchain-runtime-verified R&amp;D tool. Built from a documented case of agent deception. Empowering every tier of researcher — from hobbyist to Fortune 500 — to produce Tier-1 research.</p>
+      <p class="sitefoot-stmt" style="margin-top:12px;">Corey Alejandro · Hybrid AI Constitutional Runtime Governance Systems Research Scientist &amp; Engineer · <a href="about.html">about</a> · <a href="identity.html">identity</a> · <a href="subscribe.html">subscribe</a></p>
+    </div>
+    <div class="sitefoot-col">
+      <h4>The Tool</h4>
+      <a href="tool.html">TLC 2.0 Architecture</a>
+      <a href="tiers.html">Six Tiers</a>
+      <a href="template.html">CALS v6.1 Template</a>
+      <a href="pipeline.html">Pipeline</a>
+      <a href="registry.html">Live Registry</a>
+    </div>
+    <div class="sitefoot-col">
+      <h4>Research</h4>
+      <a href="paper.html">Paper (CCD)</a>
+      <a href="research/corpus.html">Corpus</a>
+      <a href="research/methodology.html">Methodology</a>
+      <a href="research/pre-registration.html">Pre-registration</a>
+      <a href="detector.html">Detector</a>
+    </div>
+    <div class="sitefoot-col">
+      <h4>Governance</h4>
+      <a href="governance/coi.html">Conflicts of interest</a>
+      <a href="security/threat-model.html">Threat model</a>
+      <a href="programs/crgs.html">CRGS Lab</a>
+      <a href="identity.html">Canonical Identity</a>
+      <a href="CANONICAL_INTENT.md">Intent Statement</a>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/hud.js"></script>
+<script src="assets/kernel.js"></script>
+<script src="assets/amendments.js"></script>
+<script src="assets/site.js"></script>
+</body>
+</html>
