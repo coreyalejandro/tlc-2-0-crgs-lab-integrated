@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Six Tiers — $100 to $1B · The Living Constitution 2.0</title>
+<meta name="description" content="Budget-agnostic tier table. Hobbyist ($100) to Fortune 500 ($1B). Same constitutional protocol. Different scale, tooling, and governance depth.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body class="register-operational">
+<a href="#main-content" style="position:absolute;left:-9999px;top:0;font-size:1px;">Skip to main content</a>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="index.html" class="topbar-brand">The Living <span class="em">Constitution</span> 2.0</a>
+    <nav class="topbar-nav" aria-label="Main navigation">
+      <a href="tool.html" class="topbar-link">Tool</a>
+      <a href="tiers.html" class="topbar-link is-active">Tiers</a>
+      <a href="pipeline.html" class="topbar-link">Pipeline</a>
+      <a href="template.html" class="topbar-link">Template</a>
+      <a href="registry.html" class="topbar-link">Registry</a>
+      <a href="detector.html" class="topbar-link">Detector</a>
+      <a href="paper.html" class="topbar-link">Paper</a>
+      <a href="programs/crgs.html" class="topbar-link">CRGS Lab</a>
+      <a href="identity.html" class="topbar-link">Identity</a>
+      <a href="sitemap.html" class="topbar-link">Map</a>
+      <span class="topbar-kernel-hint" aria-hidden="true">Ctrl+` Kernel</span>
+    </nav>
+  </div>
+</header>
+<main id="main-content">
+<div class="op-page" style="max-width:1180px;">
+  <div class="op-eyebrow"><a href="index.html" class="crumb-link">Home</a> / Tiers</div>
+  <h1 class="op-title">Six Tiers. $100 to $1 Billion.</h1>
+  <div class="op-status">
+    <span class="status-chip verified">Tier 1–2: Working / Partial</span>
+    <span class="status-chip in-progress">Tier 3–4: In Development</span>
+    <span class="status-chip aspirational">Tier 5–6: Planned</span>
+  </div>
+  <div class="op-content">
+
+    <p>The canonical mission of TLC 2.0 is to empower every resource category — from a hobbyist developer with $100 to a Fortune 500 global consortium with $1 billion — to produce Tier-1 research. The same constitutional protocol governs every tier. Budget determines scale, tooling, and governance depth — not scientific validity.</p>
+
+    <p>Every tier below carries its <code>truth_status</code>: what is verified working today vs. what is roadmapped. No tier overstates its current capability.</p>
+
+    <!-- TIER 1 -->
+    <h2 id="hobbyist">Tier 1 — Hobbyist Developer</h2>
+    <div class="tier-card tier-1" style="margin-bottom:32px;">
+      <div class="tier-label">Tier 1</div>
+      <div class="tier-budget">$100 – $1,000</div>
+      <div class="tier-status working">Bootstrapped · Working</div>
+      <h3 style="margin-top:8px;">Hobbyist Developer</h3>
+      <table style="margin-top:16px;">
+        <tr><th>Layer</th><th>Implementation</th><th>Status</th></tr>
+        <tr><td>AI Model</td><td>Single open model: Llama 3 (Meta, free), Mistral (free), Phi-3 (Microsoft, free). On-device via Ollama or serverless free-tier API.</td><td class="ts-working">Working</td></tr>
+        <tr><td>RAG / Factuality</td><td>Open-access corpora: arXiv, PubMed, Semantic Scholar, CrossRef. sBERT sentence-similarity for claim verification. Iterative self-critique loop.</td><td class="ts-working">Working</td></tr>
+        <tr><td>Constitutional Governance</td><td>Hard-coded Python rule engine. Plain-text constitution file. System-message wrapping. Pre-commit Truth-State Gate blocks unverified claims.</td><td class="ts-working">Working</td></tr>
+        <tr><td>Confidence Mechanism</td><td>Claim extraction via sBERT similarity. Iterative self-critique. Paragraph-level confidence badges on output. truth_status taxonomy enforced.</td><td class="ts-working">Working</td></tr>
+        <tr><td>Blockchain Governance</td><td>Git-based append-only audit log. Tamper-resistant via commit history. Single-party trust model (the researcher themselves).</td><td class="ts-working">Working</td></tr>
+        <tr><td>Neuro-Symbolic Execution</td><td>SymPy for mathematical verification. SQLite audit log. FastAPI local server. Jupyter notebooks for reproducible execution.</td><td class="ts-partial">Partial</td></tr>
+        <tr><td>Infrastructure</td><td>Runs on $500 laptop. No paid APIs required to start. Python + Node.js. SQLite. Free-tier Hugging Face inference optional.</td><td class="ts-working">Working</td></tr>
+      </table>
+      <div class="tier-output" style="margin-top:16px;">Output: Tier-1 academic research paper + concept feasibility report. No functional prototype required at this tier.</div>
+    </div>
+
+    <!-- TIER 2 -->
+    <h2 id="startup">Tier 2 — Small Business &amp; Startup</h2>
+    <div class="tier-card tier-2" style="margin-bottom:32px;">
+      <div class="tier-label">Tier 2</div>
+      <div class="tier-budget">$1,000 – $10,000</div>
+      <div class="tier-status partial">Partial · In Development</div>
+      <h3 style="margin-top:8px;">Small Business &amp; Startup</h3>
+      <table style="margin-top:16px;">
+        <tr><th>Layer</th><th>Implementation</th><th>Status</th></tr>
+        <tr><td>AI Model</td><td>Fine-tuned Llama-3-8B via QLoRA on domain data. Pre-purchased article bundles from Elsevier, Springer. Serverless GPU via Modal or RunPod.</td><td class="ts-partial">Partial</td></tr>
+        <tr><td>RAG / Factuality</td><td>Open-source vector DBs: ChromaDB, FAISS, Qdrant. Multi-source retrieval cross-check. Full-text paywalled bundles (pre-purchased).</td><td class="ts-partial">Partial</td></tr>
+        <tr><td>Constitutional Governance</td><td>Constitutional fine-tuning (Anthropic method). Lightweight "judge" model scoring outputs against the constitution. Tamper-proof audit logs. CHAE: volunteer audit buddy (2–3 peers).</td><td class="ts-partial">Partial</td></tr>
+        <tr><td>Confidence Mechanism</td><td>Multi-source retrieval cross-check. Symbolic solvers (SymPy) for logic and equations. 0–100 confidence score filtering. truth_status enforced on all outputs.</td><td class="ts-partial">Partial</td></tr>
+        <tr><td>Blockchain Governance</td><td>Append-only tamper-evident audit log (file-hash chain). No external blockchain required. Suitable for single-team use.</td><td class="ts-partial">Partial</td></tr>
+        <tr><td>Infrastructure</td><td>Docker Compose. PostgreSQL. Prometheus monitoring. Cloud VM (AWS p3.2xlarge equivalent, ~$8K/6 months). Automated CI/CD. Target latency: &lt;500ms at 10 concurrent users.</td><td class="ts-partial">Partial</td></tr>
+      </table>
+      <div class="tier-output" style="margin-top:16px;">Output: Documented Tier-1 paper + interactive web-demo prototype (Streamlit / Gradio). IRB-approved pilot (N=30). Preliminary CFA on instruments.</div>
+    </div>
+
+    <!-- TIER 3 -->
+    <h2 id="enterprise">Tier 3 — Standard Enterprise</h2>
+    <div class="tier-card tier-3" style="margin-bottom:32px;">
+      <div class="tier-label">Tier 3</div>
+      <div class="tier-budget">$10,000 – $1,000,000</div>
+      <div class="tier-status partial">Partial · Roadmapped</div>
+      <h3 style="margin-top:8px;">Standard Enterprise Corporation</h3>
+      <table style="margin-top:16px;">
+        <tr><th>Layer</th><th>Implementation</th><th>Status</th></tr>
+        <tr><td>AI Model</td><td>Domain-adapted LLaMA-3-70B or private GPT-4 / Claude API. Enterprise RAG: Scopus, IEEE Xplore, Web of Science, ClinicalTrials.gov.</td><td class="ts-partial">Partial</td></tr>
+        <tr><td>RAG / Factuality</td><td>Full-text paywalled API validation with exact paragraph matching. Bootstrapping statistical tests. Knowledge graph construction from proprietary corpora.</td><td class="ts-planned">Planned</td></tr>
+        <tr><td>Constitutional Governance</td><td>Dynamic "judge" model mapped to institutional ethical charters. Human-in-the-loop ratification workflow. Amendment approvals tracked in immutable audit trail. CHAE: part-time cell (2 auditors, 8h/day).</td><td class="ts-partial">Partial</td></tr>
+        <tr><td>Confidence Mechanism</td><td>Full-text paywalled API cross-validation. Reproducibility module: findings must replicate within a predefined tolerance before draft completion. truth_status: all claims must reach "partial" before publication.</td><td class="ts-partial">Partial</td></tr>
+        <tr><td>Blockchain Governance</td><td>Permissioned blockchain (Hyperledger Fabric or similar). Multi-party governance records. No single party can alter the audit trail. Suitable for multi-department or multi-vendor research.</td><td class="ts-planned">Planned</td></tr>
+        <tr><td>Infrastructure</td><td>Kubernetes. PostgreSQL + TimescaleDB. Real-time CCI dashboard. Automated adversarial testing pipeline. Cloud GPU cluster.</td><td class="ts-planned">Planned</td></tr>
+      </table>
+      <div class="tier-output" style="margin-top:16px;">Output: Complete patent applications + design-for-manufacturing package (BOM, regulatory path) + working alpha prototype. Full IRB review (N=100).</div>
+    </div>
+
+    <!-- TIER 4 -->
+    <h2 id="academic">Tier 4 — Academic Research Institution</h2>
+    <div class="tier-card tier-4" style="margin-bottom:32px;">
+      <div class="tier-label">Tier 4</div>
+      <div class="tier-budget">$10,000 – $10,000,000</div>
+      <div class="tier-status planned">Roadmapped</div>
+      <h3 style="margin-top:8px;">Academic Research Institution</h3>
+      <table style="margin-top:16px;">
+        <tr><th>Layer</th><th>Implementation</th><th>Status</th></tr>
+        <tr><td>AI Model</td><td>Domain-adapted foundation models. Cross-disciplinary enterprise knowledge graphs. Real-time literature integration. Multi-modal data ingestion.</td><td class="ts-planned">Planned</td></tr>
+        <tr><td>RAG / Factuality</td><td>Cross-disciplinary knowledge graph verification. Real-time citation graph. Instrument-level validation against CCI classifier (&gt;90% accuracy).</td><td class="ts-planned">Planned</td></tr>
+        <tr><td>Constitutional Governance</td><td>CHAE full cell: 24/7 coverage, rotating panel. NAB (Neurodivergent Advisory Board) with veto power. CGB quarterly review. OSSC open-source stewardship. OSF preregistration with locked analysis plan.</td><td class="ts-planned">Planned</td></tr>
+        <tr><td>Confidence Mechanism</td><td>Constitutional Compliance Index (CCI) &gt;0.90 maintained continuously. Experimental Reproducibility Module: findings must replicate within tolerance before draft. Formal multi-group SEM (MSEM) with Bayesian sensitivity.</td><td class="ts-planned">Planned</td></tr>
+        <tr><td>Blockchain Governance</td><td>Institutional blockchain consortium. IRB-governed audit chain. Third-party audit access. CHAE decision logs immutably recorded. GDPR Art. 9 compliance for special-category data.</td><td class="ts-planned">Planned</td></tr>
+        <tr><td>Infrastructure</td><td>On-premises or private cloud GPU cluster. vLLM inference. Kafka message bus. EU GDPR-compliant data architecture. DPIA documented and filed.</td><td class="ts-planned">Planned</td></tr>
+      </table>
+      <div class="tier-output" style="margin-top:16px;">Output: Publication-ready paper (CHI, NeurIPS, AAAI, Nature Human Behaviour). Open-source reproducibility package. ACM Artifacts Available + Functional badges. Multi-site multi-wave longitudinal study (N=100–1000).</div>
+    </div>
+
+    <!-- TIER 5 -->
+    <h2 id="tier1">Tier 5 — Tier-1 Academic Institution</h2>
+    <div class="tier-card tier-5" style="margin-bottom:32px;">
+      <div class="tier-label">Tier 5</div>
+      <div class="tier-budget">$1,000,000 – $100,000,000</div>
+      <div class="tier-status planned">Planned · Long-Range Roadmap</div>
+      <h3 style="margin-top:8px;">Tier-1 Academic Institution (Stanford, MIT, Oxford equivalent)</h3>
+      <table style="margin-top:16px;">
+        <tr><th>Layer</th><th>Implementation</th><th>Status</th></tr>
+        <tr><td>AI Model</td><td>Bespoke foundation model trained from scratch on multi-modal, multi-disciplinary data. High-performance GPU clusters (H100 bare metal). Constitutional invariants embedded in training, not just inference.</td><td class="ts-planned">Planned</td></tr>
+        <tr><td>RAG / Factuality</td><td>Cross-disciplinary knowledge graph with real-time sensor feeds. Physical laboratory integration. Digital twin verification of experimental results before publication.</td><td class="ts-planned">Planned</td></tr>
+        <tr><td>Constitutional Governance</td><td>Activation-steering constitutional embedding. Real-time multi-agent AI "ethics board simulation" with human escalation. CHAE: 24/7 funded shifts across multiple global hubs. Formal theorem prover (Coq / Lean) for mathematical claims.</td><td class="ts-planned">Planned</td></tr>
+        <tr><td>Confidence Mechanism</td><td>Formal logic validation via theorem provers. Experimental Reproducibility Module with physical replication. Cross-disciplinary knowledge graph cross-check. CCI classifier &gt;95% accuracy, independently benchmarked.</td><td class="ts-planned">Planned</td></tr>
+        <tr><td>Blockchain Governance</td><td>Consortium blockchain with institutional nodes at each partner university. Independent third-party audit. ISO/IEC 42001 AI management certification. EU AI Act high-risk conformity assessment pathway.</td><td class="ts-planned">Planned</td></tr>
+        <tr><td>Infrastructure</td><td>Bare-metal H100 clusters. Federated Kubernetes across global hubs. Apache Kafka global message bus. p99 end-to-end latency &lt;300ms for short responses at 1,000 concurrent users.</td><td class="ts-planned">Planned</td></tr>
+      </table>
+      <div class="tier-output" style="margin-top:16px;">Output: Working physical prototype (drug formulation, alloy, computational biology model). Regulatory documentation (IND, MSDS, CE marking). Clinical trial designs. Publication in Nature, Science, Cell. Autonomous AI Scientist capability demonstrated.</div>
+    </div>
+
+    <!-- TIER 6 -->
+    <h2 id="fortune500">Tier 6 — Fortune 500 / Global Consortium</h2>
+    <div class="tier-card tier-6" style="margin-bottom:32px;">
+      <div class="tier-label">Tier 6</div>
+      <div class="tier-budget">$100,000,000 – $1,000,000,000</div>
+      <div class="tier-status planned">Planned · Long-Range Roadmap</div>
+      <h3 style="margin-top:8px;">Fortune 500 Enterprise Corporation / Global Consortium</h3>
+      <table style="margin-top:16px;">
+        <tr><th>Layer</th><th>Implementation</th><th>Status</th></tr>
+        <tr><td>AI Model</td><td>Central orchestrator managing specialized expert foundation models across domains (materials, biology, law, finance, engineering). Each domain model constitutionally governed. Quantum computing for optimization layers where classical compute is insufficient.</td><td class="ts-planned">Planned</td></tr>
+        <tr><td>RAG / Factuality</td><td>Real-time world-state verification via physical sensor networks (IoT, lab instruments, market feeds). Federated cross-member validation — no single consortium member can falsify shared findings. Global datacenters with sub-100ms data access latency worldwide.</td><td class="ts-planned">Planned</td></tr>
+        <tr><td>Constitutional Governance</td><td>Distributed, blockchain-based governance ledger. No single party controls the constitutional rules or the audit trail. Independent third-party AI audit logs. Post-market AI surveillance feeding automated constitutional refinement loops. Mandatory regulatory compliance: ISO/IEC 42001, EU AI Act Annex III high-risk, NIST AI RMF 1.0, GDPR.</td><td class="ts-planned">Planned</td></tr>
+        <tr><td>Confidence Mechanism</td><td>Mathematical proofs for key claims (Coq/Lean). Physical sensor cross-validation. Federated cross-member replication: findings must independently replicate at &gt;2 consortium member sites before publication. Real-time CCI across all production deployments.</td><td class="ts-planned">Planned</td></tr>
+        <tr><td>Blockchain Governance</td><td>Public permissioned blockchain. All governance decisions, constitutional amendments, CHAE stops, and audit findings are recorded immutably and are independently inspectable by regulators, investors, and the public. Cryptographically signed by each consortium member. Satisfies EU AI Act Art. 12 (record-keeping) and Art. 17 (quality management).</td><td class="ts-planned">Planned</td></tr>
+        <tr><td>Infrastructure</td><td>Global bare-metal H100 clusters. Quantum computing co-processors for specific optimization tasks. Federated Kubernetes across global datacenters. Apache Kafka global message bus. 99.99% uptime SLA. Geo-redundant with sub-second failover.</td><td class="ts-planned">Planned</td></tr>
+      </table>
+      <div class="tier-output" style="margin-top:16px;">Output: Market-ready consumer product at global scale. Post-market AI surveillance system feeding automated constitutional refinement loops. The neurodivergent-first, accessible WebUI/TUI that is the terminal product of TLC 2.0 — the Tier-1 research-based consumer-facing product that every lower tier has been building toward.</div>
+    </div>
+
+    <h2>The Constant Across All Tiers</h2>
+    <p>Budget determines scale and tooling. It does not determine scientific validity. Every tier executes the same constitutional research protocol:</p>
+    <ul>
+      <li>Every claim carries a <code>truth_status</code> — verified, partial, draft, unverified, or planned</li>
+      <li>Every claim is evidence-bound — no claim exists without an evidence artifact</li>
+      <li>Every claim is inspectable — the evidence can be independently reviewed</li>
+      <li>Every governance decision is logged — append-only, tamper-resistant at minimum, blockchain-verified at scale</li>
+      <li>Neurodivergent-first design is non-negotiable at every tier — the governance system was designed for a monotropic, ADHD+OCD+autistic operator and that design is a feature, not an accommodation</li>
+    </ul>
+
+    <div class="op-related">
+      <div class="op-related-eyebrow">Related</div>
+      <div class="op-related-links">
+        <a href="tool.html">TLC 2.0 Architecture — the runtime that governs all tiers</a>
+        <a href="pipeline.html">Research → Paper → Product pipeline</a>
+        <a href="template.html">CALS v6.1 Template — start at Tier 1, scale to Tier 6</a>
+        <a href="registry.html">Live Module Registry — current truth_status per module</a>
+        <a href="identity.html">Canonical Identity Statement</a>
+      </div>
+    </div>
+  </div>
+</div>
+</main>
+<footer class="sitefoot">
+  <div class="sitefoot-inner">
+    <div class="sitefoot-col"><h4>The Living Constitution 2.0</h4><p class="sitefoot-stmt">Constitutional AI-governed, blockchain-runtime-verified R&amp;D tool. Corey Alejandro · <a href="identity.html">identity</a></p></div>
+    <div class="sitefoot-col"><h4>The Tool</h4><a href="tool.html">Architecture</a><a href="tiers.html">Six Tiers</a><a href="template.html">Template</a><a href="pipeline.html">Pipeline</a><a href="registry.html">Registry</a></div>
+    <div class="sitefoot-col"><h4>Research</h4><a href="paper.html">Paper</a><a href="detector.html">Detector</a><a href="research/corpus.html">Corpus</a><a href="runtime/reproduce.html">Reproduce</a></div>
+    <div class="sitefoot-col"><h4>Program</h4><a href="programs/crgs.html">CRGS Lab</a><a href="funding-ask.html">Funding Ask</a><a href="governance/coi.html">COI</a><a href="sitemap.html">Sitemap</a></div>
+  </div>
+</footer>
+<script src="assets/hud.js"></script>
+<script src="assets/kernel.js"></script>
+<script src="assets/amendments.js"></script>
+<script src="assets/site.js"></script>
+</body>
+</html>
